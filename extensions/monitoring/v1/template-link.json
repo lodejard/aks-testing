@@ -13,7 +13,7 @@
     "properties": {
         "autoUpgradeMinorVersion": true,
         "settings": {
-            "workspaceId": "[reference(resourceId('Microsoft.OperationalInsights/workspaces/', concat(resourceGroup().name, '-', uniquestring(resourceGroup().id)))).customerId]"
+            "workspaceId": "[reference(resourceId('Microsoft.OperationalInsights/workspaces/', concat(resourceGroup().name, '-', uniquestring(resourceGroup().id))), '2017-03-15-preview').customerId]"
         },        
         "protectedSettings": {
             "workspaceKey": "[listKeys(resourceId('Microsoft.OperationalInsights/workspaces/', concat(resourceGroup().name, '-', uniquestring(resourceGroup().id))), '2015-11-01-preview').primarySharedKey]"
