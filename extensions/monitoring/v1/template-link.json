@@ -9,14 +9,14 @@
         "[concat('Microsoft.Compute/virtualMachines/', EXTENSION_TARGET_VM_NAME_PREFIX, copyIndex(EXTENSION_LOOP_OFFSET))]"
     ],
     "location": "[variables('location')]",
-    "name": "[concat(EXTENSION_TARGET_VM_NAME_PREFIX, copyIndex(EXTENSION_LOOP_OFFSET), '/Microsoft.EnterpriseCloud.Monitoring')]",
+    "name": "[concat(EXTENSION_TARGET_VM_NAME_PREFIX, copyIndex(EXTENSION_LOOP_OFFSET), '/OmsAgentForLinux')]",
     "properties": {
         "autoUpgradeMinorVersion": true,
         "settings": {
-            "workspaceId": "EXTENSION_PARAMETERS_REPLACE"
+            "workspaceId": "[reference(resourceId('Microsoft.OperationalInsights/workspaces/', concat(resourceGroup().name, '-', uniquestring(resourceGroup().id)))).customerId]"
         },        
         "protectedSettings": {
-            "workspaceKey": "EXTENSION_PARAMETERS_REPLACE"
+            "workspaceKey": "[listKeys(resourceId('Microsoft.OperationalInsights/workspaces/', concat(resourceGroup().name, '-', uniquestring(resourceGroup().id))), '2015-11-01-preview').primarySharedKey]"
         },
         "publisher": "Microsoft.EnterpriseCloud.Monitoring",
         "type": "OmsAgentForLinux",
